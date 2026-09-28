@@ -1,0 +1,603 @@
+<html> <head>
+<title>Movie Ticket Booking System</title>
+
+<style>
+
+    body {
+        font-family: Arial;
+        background-color: #222;
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        color: red;
+    }
+
+    .movie {
+        border: 2px solid white;
+        padding: 20px;
+        margin: 20px;
+        display: inline-block;
+        width: 200px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    .seat {
+        background-color: green;
+        color: white;
+    }
+
+    .selected {
+        background-color: red;
+    }
+
+    .booked {
+        background-color: gray;
+    }
+
+</style>
+
+</head> <body>
+<h1>🎬 Movie Ticket Booking System</h1>
+
+
+<!-- MOVIE SELECTION -->
+
+<h2>Select Movie</h2>
+
+<div class="movie">
+
+    <h3>Avengers: Endgame</h3>
+
+    <p>Action / Sci-Fi</p>
+
+    <p>Rating: ⭐ 4.8</p>
+
+    <button onclick="selectMovie('Avengers: Endgame')">
+        Select
+    </button>
+
+</div>
+<div class="movie">
+
+    <h3>SpiderMan : Brand New Day</h3>
+
+    <p>Action / Sci-Fi</p>
+
+    <p>Rating: ⭐ 4.2</p>
+
+    <button onclick="selectMovie('SpiderMan : Brand New Day')">
+        Select
+    </button>
+
+</div>
+
+
+<div class="movie">
+
+    <h3>Interstellar</h3>
+
+    <p>Sci-Fi / Drama</p>
+
+    <p>Rating: ⭐ 4.7</p>
+
+    <button onclick="selectMovie('Interstellar')">
+        Select
+    </button>
+
+</div>
+
+
+<div class="movie">
+
+    <h3>Inception</h3>
+
+    <p>Thriller / Sci-Fi</p>
+
+    <p>Rating: ⭐ 4.6</p>
+
+    <button onclick="selectMovie('Inception')">
+        Select
+    </button>
+
+</div>
+
+
+<hr>
+
+
+<!-- BOOKING DETAILS -->
+
+<h2>Booking Details</h2>
+
+<p>
+    Selected Movie:
+    <input type="text" id="movieName" readonly>
+</p>
+
+
+<p>
+    Select Date:
+    <input type="date" id="date">
+</p>
+
+
+<!-- SHOW TIMINGS -->
+
+<h3>Select Show Timing</h3>
+
+<button onclick="selectTime('10:00 AM')">
+    10:00 AM
+</button>
+
+<button onclick="selectTime('1:30 PM')">
+    1:30 PM
+</button>
+
+<button onclick="selectTime('5:00 PM')">
+    5:00 PM
+</button>
+
+<button onclick="selectTime('8:30 PM')">
+    8:30 PM
+</button>
+
+
+<p>
+    Selected Time:
+    <span id="time">Not Selected</span>
+</p>
+
+
+<!-- SEAT SELECTION -->
+
+<h2>Select Your Seats</h2>
+
+<p>SCREEN</p>
+
+<hr width="400">
+
+
+<div>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        A1
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        A2
+    </button>
+
+    <button class="seat booked">
+        A3
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        A4
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        A5
+    </button>
+
+</div>
+
+
+<div>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        B1
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        B2
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        B3
+    </button>
+
+    <button class="seat booked">
+        B4
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        B5
+    </button>
+
+</div>
+
+
+<div>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        C1
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        C2
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        C3
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        C4
+    </button>
+
+    <button class="seat"
+            onclick="selectSeat(this)">
+        C5
+    </button>
+
+</div>
+
+
+<!-- BOOKING SUMMARY -->
+
+<h2>Booking Summary</h2>
+
+<p>
+    Movie:
+    <span id="summaryMovie">-</span>
+</p>
+
+<p>
+    Time:
+    <span id="summaryTime">-</span>
+</p>
+
+<p>
+    Seats:
+    <span id="summarySeats">-</span>
+</p>
+
+<p>
+    Total Price:
+    ₹<span id="price">0</span>
+</p>
+
+
+<button onclick="bookTicket()">
+    Book Ticket
+</button>
+
+
+<hr>
+
+
+<!-- RATING SYSTEM -->
+
+<h2>⭐ Rate a Movie</h2>
+
+<select id="ratingMovie">
+
+    <option value="">
+        Select Movie
+    </option>
+
+    <option>
+        Avengers: Endgame
+    </option>
+<option>
+        Spider Man : brand new day
+    </option>
+    <option>
+        Interstellar
+    </option>
+
+    <option>
+        Inception
+    </option>
+
+</select>
+
+
+<p>Give Rating</p>
+
+<button onclick="rateMovie(1)">⭐</button>
+<button onclick="rateMovie(2)">⭐⭐</button>
+<button onclick="rateMovie(3)">⭐⭐⭐</button>
+<button onclick="rateMovie(4)">⭐⭐⭐⭐</button>
+<button onclick="rateMovie(5)">⭐⭐⭐⭐⭐</button>
+
+
+<p>
+    Your Rating:
+    <span id="rating">0</span>/5
+</p>
+
+
+<textarea
+    id="review"
+    placeholder="Write your review">
+</textarea>
+
+<br><br>
+
+<button onclick="submitReview()">
+    Submit Review
+</button>
+
+
+<!-- ================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================= -->
+
+<script language="javascript">
+
+    var selectedMovie = "";
+
+    var selectedTime = "";
+
+    var selectedSeats = [];
+
+    var ticketPrice = 200;
+
+    var rating = 0;
+
+
+    // -------------------------
+    // MOVIE SELECTION
+    // -------------------------
+
+    function selectMovie(movie) {
+
+        selectedMovie = movie;
+
+        document.getElementById("movieName").value =
+            movie;
+
+        document.getElementById("summaryMovie")
+            .innerHTML = movie;
+
+    }
+
+
+    // -------------------------
+    // TIME SELECTION
+    // -------------------------
+
+    function selectTime(time) {
+
+        selectedTime = time;
+
+        document.getElementById("time")
+            .innerHTML = time;
+
+        document.getElementById("summaryTime")
+            .innerHTML = time;
+
+    }
+
+
+    // -------------------------
+    // SEAT SELECTION
+    // -------------------------
+
+    function selectSeat(seat) {
+
+        var seatNumber =
+            seat.innerHTML.trim();
+
+
+        if (seat.classList.contains("booked")) {
+
+            alert("This seat is already booked!");
+
+            return;
+        }
+
+
+        if (seat.classList.contains("selected")) {
+
+            seat.classList.remove("selected");
+
+
+            selectedSeats =
+                selectedSeats.filter(
+                    function(item) {
+
+                        return item != seatNumber;
+
+                    }
+                );
+
+        }
+
+        else {
+
+            seat.classList.add("selected");
+
+            selectedSeats.push(seatNumber);
+
+        }
+
+
+        updatePrice();
+
+    }
+
+
+    // -------------------------
+    // UPDATE PRICE
+    // -------------------------
+
+    function updatePrice() {
+
+        var total =
+            selectedSeats.length * ticketPrice;
+
+
+        document.getElementById("price")
+            .innerHTML = total;
+
+
+        if (selectedSeats.length == 0) {
+
+            document.getElementById("summarySeats")
+                .innerHTML = "-";
+
+        }
+
+        else {
+
+            document.getElementById("summarySeats")
+                .innerHTML =
+                selectedSeats.join(", ");
+
+        }
+
+    }
+
+
+    // -------------------------
+    // BOOK TICKET
+    // -------------------------
+
+    function bookTicket() {
+
+        var date =
+            document.getElementById("date").value;
+
+
+        if (selectedMovie == "") {
+
+            alert("Please select a movie!");
+
+            return;
+
+        }
+
+
+        if (date == "") {
+
+            alert("Please select a date!");
+
+            return;
+
+        }
+
+
+        if (selectedTime == "") {
+
+            alert("Please select a show timing!");
+
+            return;
+
+        }
+
+
+        if (selectedSeats.length == 0) {
+
+            alert("Please select at least one seat!");
+
+            return;
+
+        }
+
+
+        var total =
+            selectedSeats.length * ticketPrice;
+
+
+        alert(
+            "🎉 BOOKING CONFIRMED!\n\n" +
+
+            "Movie: " + selectedMovie +
+
+            "\nDate: " + date +
+
+            "\nTime: " + selectedTime +
+
+            "\nSeats: " +
+            selectedSeats.join(", ") +
+
+            "\nTotal: ₹" + total
+        );
+
+    }
+
+
+    // -------------------------
+    // MOVIE RATING
+    // -------------------------
+
+    function rateMovie(value) {
+
+        rating = value;
+
+        document.getElementById("rating")
+            .innerHTML = rating;
+
+    }
+
+
+    // -------------------------
+    // SUBMIT REVIEW
+    // -------------------------
+
+    function submitReview() {
+
+        var movie =
+            document.getElementById("ratingMovie")
+                .value;
+
+
+        var review =
+            document.getElementById("review")
+                .value;
+
+
+        if (movie == "") {
+
+            alert("Please select a movie!");
+
+            return;
+
+        }
+
+
+        if (rating == 0) {
+
+            alert("Please give a rating!");
+
+            return;
+
+        }
+
+
+        alert(
+            "Thank you for your review!\n\n" +
+
+            "Movie: " + movie +
+
+            "\nRating: " + rating + "/5" +
+
+            "\nReview: " + review
+        );
+
+    }
+
+</script>
+
+</body> </html>
